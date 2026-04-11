@@ -24,7 +24,7 @@ def main():
         while datetime.now() < deadline:
             logger.log("[Main] Checking apps...")
             valorant.downtime()
-            #chrome.downtime()
+            chrome.downtime()
             time.sleep(30)
 
 main()
