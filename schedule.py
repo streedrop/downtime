@@ -13,31 +13,18 @@ class Week(Enum):
     SATURDAY = 5
 
 class Schedule():
-    def __init__(self, logger):
+    def __init__(self, logger, downtime):
         self.logger = logger
 
-        """
-        self.uptime = {
-            Week.SUNDAY.value: [[8, 22]],
-            Week.MONDAY.value: [[8, 22]],
-            Week.TUESDAY.value: [[8, 22]],
-            Week.WEDNESDAY.value: [[8, 22]],
-            Week.THURSDAY.value: [[8, 22]],
-            Week.FRIDAY.value: [[8, 24]],
-            Week.SATURDAY.value: [[8, 24]]
-        }
-        """
-
         self.downtime = {
-            Week.SUNDAY.value: [[0, 8], [22, 24]],
-            Week.MONDAY.value: [[0, 8], [22, 24]],
-            Week.TUESDAY.value: [[0, 8], [22, 24]],
-            Week.WEDNESDAY.value: [[0, 8], [22, 24]],
-            Week.THURSDAY.value: [[0, 8], [22, 24]],
-            Week.FRIDAY.value: [[0, 8]],
-            Week.SATURDAY.value: [[0, 8]]
+            Week.SUNDAY.value: downtime["sunday"],
+            Week.MONDAY.value: downtime["monday"],
+            Week.TUESDAY.value: downtime["tuesday"],
+            Week.WEDNESDAY.value: downtime["wednesday"],
+            Week.THURSDAY.value: downtime["thursday"],
+            Week.FRIDAY.value: downtime["friday"],
+            Week.SATURDAY.value: downtime["saturday"]
         }
-
     
     def inDowntime(self):
         now = datetime.now()
@@ -124,7 +111,7 @@ class Schedule():
         if difference > 0:
             time.sleep(difference)
 
-        self.logger.log("[Schedule] In downtime.")
+        self.logger.log("[Schedule] Downtime has started.")
 
     def waitUntilNextUptime(self):
         difference = self.timeUntilNextUptime()
@@ -132,4 +119,4 @@ class Schedule():
         if difference > 0:
             time.sleep(difference)
 
-        self.logger.log("[Schedule] In uptime.")
+        self.logger.log("[Schedule] Uptime has started.")
