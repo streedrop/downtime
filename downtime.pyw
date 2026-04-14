@@ -15,16 +15,21 @@ def main():
     valorant = Valorant(logger)
     chrome = Chrome(logger)
 
-    # While the OS is open
-    while True:
-        schedule.waitUntilNextDowntime()
-        deadline = datetime.now() + timedelta(seconds=schedule.timeUntilNextUptime())
+    try:
+        # While the OS is open
+        while True:
+            schedule.waitUntilNextDowntime()
+            deadline = datetime.now() + timedelta(seconds=schedule.timeUntilNextUptime())
 
-        # While we are still in downtime
-        while datetime.now() < deadline:
-            logger.log("[Main] Checking apps...")
-            valorant.downtime()
-            chrome.downtime()
-            time.sleep(30)
+            # While we are still in downtime
+            while datetime.now() < deadline:
+                logger.log("[Main] Checking apps...")
+                valorant.downtime()
+                chrome.downtime()
+                time.sleep(30)
+    except KeyboardInterrupt:
+        logger.log("[Main] Script manually ended.")
+    except Exception as e:
+        logger.log("[Main] Script unexpectedly ended: {}".format(e))
 
 main()
