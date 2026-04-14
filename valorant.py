@@ -2,9 +2,9 @@ import os
 
 from app import App
 
-class Valorant():
+class Valorant(App):
     def __init__(self, logger):
-        self.app = App(logger, "Valorant", "VALORANT-Win64-Shipping", "VALORANT-Win64-Shipping.exe")
+        super().__init__(logger, "Valorant", "VALORANT-Win64-Shipping", "VALORANT-Win64-Shipping.exe")
         # File that contains in-game logs
         self.logfile_name = os.path.expandvars("%LOCALAPPDATA%\\VALORANT\\Saved\\Logs\\ShooterGame.log")
         self.logfile = open(self.logfile_name)
@@ -12,11 +12,11 @@ class Valorant():
         self.in_game = False
     
     def downtime(self):
-        if self.app.isOpen():
+        if self.isOpen():
             if not self.isInGame():
-                self.app.close()
+                self.close()
             else:
-                self.app.logger.log("[Valorant] Still in game. Not closing.")
+                self.logger.log("[Valorant] Still in game. Not closing.")
 
     # Returns whether I am in game or not with proper file management
     def isInGame(self):
@@ -26,7 +26,7 @@ class Valorant():
 
         # Retrieve game state and log it
         self.updateGameState()
-        self.app.logger.log("[Valorant] InGame: {}".format(self.in_game))
+        self.logger.log("[Valorant] InGame: {}".format(self.in_game))
 
         # If not in game, close file and return false
         if not self.in_game:

@@ -1,11 +1,9 @@
-import os
-
 from app import App
 
-class Chrome():
+class Chrome(App):
     def __init__(self, logger):
-        self.app = App(logger, "Chrome", "chrome.exe")
+        super().__init__(logger, "Chrome", "chrome.exe")
     
     def downtime(self):
-        if self.app.isOpen():
-            self.app.close()
+        if self.isOpen():
+            self.close()

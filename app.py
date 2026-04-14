@@ -7,13 +7,14 @@ class App():
         self.process_name = process_name
         self.taskkill_name = taskkill_name
     
+    def __str__(self):
+        return self.name
+
+    def __repr__(self):
+        return self.__str__()
+    
     def isOpen(self):
-        if self.process_name in subprocess.run(["tasklist"], capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW).stdout:
-            self.logger.log("[{}] {} is open.".format(self.name, self.name))
-            return True
-        
-        self.logger.log("[{}] {} is not open.".format(self.name, self.name))
-        return False
+       return self.process_name in subprocess.run(["tasklist"], capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW).stdout
 
     def close(self):
         self.logger.log("[{}] Exiting {}. Downtime has passed.".format(self.name, self.name))
