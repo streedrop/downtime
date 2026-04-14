@@ -3,3 +3,4 @@ __pycache__/
 
 # Custom
 downtime.log
+config.json

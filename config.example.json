@@ -1,13 +1,13 @@
 {
     "output": {
-        "console": true,
+        "console": false,
         "file": true
     },
 
     "downtime": {
         "sunday": [[0, 8], [22, 24]],
         "monday": [[0, 8], [22, 24]],
-        "tuesday": [[0, 8], [15, 24]],
+        "tuesday": [[0, 8], [22, 24]],
         "wednesday": [[0, 8], [22, 24]],
         "thursday": [[0, 8], [22, 24]],
         "friday": [[0, 8]],
@@ -16,7 +16,7 @@
 
     "apps": {
         "valorant": true,
-        "chrome": false
+        "chrome": true
     },
 
     "frequency": 30
